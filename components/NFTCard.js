@@ -1,21 +1,30 @@
-import { View, Image, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import React from 'react'
-import { COLORS, SIZES, SHADOWS, assets, FONTS } from '../constants';
-import { CircleButton, RectButton } from './Button';
-import { SubInfo, EthPrice, NFTTitle } from './SubInfo';
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import { View, Image } from "react-native";
+
+import { COLORS, SIZES, SHADOWS, assets } from "../constants";
+import { SubInfo, EthPrice, NFTTitle } from "./SubInfo";
+import { RectButton, CircleButton } from "./Button";
 
 const NFTCard = ({ data }) => {
     const navigation = useNavigation();
+
     return (
-        <View style={{
-            backgroundColor: COLORS.white,
-            borderRadius: SIZES.font,
-            marginBottom: SIZES.extraLarge,
-            margin: SIZES.base,
-            ...SHADOWS.dark
-        }}>
-            <View style={{ width: "100%", height: 250 }}>
+        <View
+            style={{
+                backgroundColor: COLORS.white,
+                borderRadius: SIZES.font,
+                marginBottom: SIZES.extraLarge,
+                margin: SIZES.base,
+                ...SHADOWS.dark,
+            }}
+        >
+            <View
+                style={{
+                    width: "100%",
+                    height: 250,
+                }}
+            >
                 <Image
                     source={data.image}
                     resizeMode="cover"
@@ -26,37 +35,38 @@ const NFTCard = ({ data }) => {
                         borderTopRightRadius: SIZES.font,
                     }}
                 />
+
                 <CircleButton imgUrl={assets.heart} right={10} top={10} />
             </View>
+
             <SubInfo />
-            <View style={{
-                width: "100%",
-                padding: SIZES.font,
-                font: FONTS.regular,
-            }}>
+
+            <View style={{ width: "100%", padding: SIZES.font }}>
                 <NFTTitle
                     title={data.name}
                     subTitle={data.creator}
                     titleSize={SIZES.large}
                     subTitleSize={SIZES.small}
                 />
-                <View style={{
-                    marginTop: SIZES.font,
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                }}>
+
+                <View
+                    style={{
+                        marginTop: SIZES.font,
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                    }}
+                >
                     <EthPrice price={data.price} />
-                    <RectButton 
+                    <RectButton
                         minWidth={120}
                         fontSize={SIZES.font}
-                        handlePress={() => navigation.navigate("Detail", { data })}
+                        handlePress={() => navigation.navigate("Details", { data })}
                     />
                 </View>
             </View>
-
         </View>
-    )
-}
+    );
+};
 
-export default NFTCard
+export default NFTCard;
